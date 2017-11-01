@@ -1,6 +1,7 @@
 import json
 import requests
 from flask import (Flask, jsonify, render_template)
+from model import (connect_to_db, db, Company)
 
 
 
@@ -9,8 +10,7 @@ app.secret_key = "miau"
 
 
 def grab_gd_data():
-    """queries glassdoor api, returns company's and their ratings"""
-
+    """queries glassdoor api, returns company information in json format"""
 
     query = "http://api.glassdoor.com/api/api.htm?v=1&format=json&t.p=206388&t.k=gwse8iYzpD1&action=employers"
     headers = {'user-agent': 'Mozilla/5.0'}
@@ -21,16 +21,15 @@ def grab_gd_data():
 
 
 @app.route("/")
-def render_home():
-    """testing"""
+def add_to_db():
+    """add select data from api to internal db"""
 
     result = grab_gd_data()["response"]["employers"]
-    for employer in out:
-        print employer["name"], employer["overallRating"]
-        #print out["name"], out["overallRating"]
+    for employer in result:
+        print employer["name"], employer["overallRating"], employer["squareLogo"], employer["industry"]
 
 
-    return jsonify(out)
+    return jsonify(result)
 
 # glassdoor api
 # find companies and their ratings
@@ -46,6 +45,6 @@ def render_home():
 
 if __name__ == "__main__":
     app.debug = True
-    #connect_to_db(app, "postgresql:///companies")
+    connect_to_db(app, "postgresql:///companydata")
     app.run(port=5000)
     grab_gd_data()
