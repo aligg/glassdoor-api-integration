@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h4> Update ratings </h4>
+
+    <form action="/rated", method="POST"><br>
+        Company: 
+        <select name="company">
+            {% for item in session['companies'] %}
+                <option name= "company" value="{{item[0]}}">{{item[0]}}</option>
+            {% endfor %}
+        </select><br><br>
+        New Rating: <input type="text" name="newrating" value="Enter rating in range 1,5"><br><br>
+        <input type = "submit">
+    </form>
+</div>
+
+{% endblock %}

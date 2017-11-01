@@ -1,0 +1,55 @@
+<!doctype html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" href="static/css/home.css">
+            <title>Company Ratings</title>
+        </head>
+    <body>
+
+
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation">
+                    <a href="/">Home</a>
+                </li>
+                <li role="presentation">
+                    <a href="/rate">Update Rating</a>
+                </li>
+            </ul>
+        <h3 class="text-muted">Company Ratings</h3>
+        </nav> 
+    </div>
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-info">
+        {{message}}
+    </div>
+{% endfor %}
+
+
+
+</div>
+
+
+
+{% block content%}
+
+
+
+{% endblock %}
+<div class="container">
+    <footer class="footer">
+        <p><img src="/static/images/kitty.png" height="25"><img src="/static/images/kitty.png" height="25"><img src="/static/images/kitty.png" height="25"></p> 
+    </footer>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

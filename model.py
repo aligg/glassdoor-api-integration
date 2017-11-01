@@ -8,8 +8,8 @@ class Company(db.Model):
     __tablename__ = "companies"
 
     item_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
-    name = db.Column(db.String(30), nullable=False)
-    rating = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    rating = db.Column(db.Float, nullable=False)
     logo = db.Column(db.String(300), nullable=True)
     industry = db.Column(db.String(100), nullable=True)
 
