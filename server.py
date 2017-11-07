@@ -13,7 +13,8 @@ app.secret_key = "miau"
 def grab_gd_data():
     """queries glassdoor api, returns company information in json format"""
 
-    query = "http://api.glassdoor.com/api/api.htm?v=1&format=json&t.p=206388&t.k=gwse8iYzpD1&action=employers&q=food"
+    #to do: store keys in session or secret.py
+    query = "http://api.glassdoor.com/api/api.htm?v=1&format=json&t.p=206388&t.k=gwse8iYzpD1&action=employers&q=%s" % ('computer')
     headers = {'user-agent': 'Mozilla/5.0'}
     data = requests.get(query, headers=headers)
     data = data.text
@@ -26,8 +27,6 @@ def add_to_db():
 
     existing_data = [company.name for company in Company.query.all()]
     
-    print existing_data
-
     result = grab_gd_data()["response"]["employers"]
     for employer in result:
         if employer["name"] not in existing_data:
@@ -35,7 +34,7 @@ def add_to_db():
                                 rating = float(employer["overallRating"]),
                                 logo = employer["squareLogo"],
                                 industry = employer["industry"])
-            ##add if employer logo is None 
+            ##to do: add if employer logo is None 
             db.session.add(employer)
     db.session.commit()
 
@@ -91,7 +90,6 @@ def render_api_endpoint():
     return jsonify(companydict)
 
   
-
 
 if __name__ == "__main__":
     app.debug = True

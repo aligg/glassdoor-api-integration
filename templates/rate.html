@@ -12,9 +12,29 @@
                 <option name= "company" value="{{item[0]}}">{{item[0]}}</option>
             {% endfor %}
         </select><br><br>
-        New Rating: <input type="text" name="newrating" value="Enter rating in range 1,5"><br><br>
-        <input type = "submit">
+        New Rating: <input type="text" name="newrating" id="newr" value="Enter rating in range 1,5"><br><br>
+        <input type = "submit" onclick="validateIt()">
     </form>
+    <p id="messagearea"></p>
 </div>
 
+<script>
+    function validateIt() {
+        var input, text;
+
+        //get input field element
+        input = document.getElementById("newr").value;
+
+        //if not number btwn 1 & 5 inclusive, try again
+        if (isNaN(input) || input < 1 || input > 5) {
+            text="Please input a number between 1 and 5";
+        } else {
+            text="input go";
+        }
+        document.getElementById("messagearea").innerHTML = text;
+    }
+</script>
+
 {% endblock %}
+
+
